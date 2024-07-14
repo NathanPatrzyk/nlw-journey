@@ -1,10 +1,10 @@
-import { ArrowRight, UserRoundPlus } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { InviteGuestsModal } from "./invite-guests-modal";
 import { ConfirmTripModal } from "./confirm-trip-modal";
 import { DestinationAndDateStep } from "./steps/destination-and-date-step";
 import { InviteGuestsStep } from "./steps/invite-guests-step";
+import { DateRange } from "react-day-picker";
 
 export function CreateTripPage() {
   const navigate = useNavigate();
@@ -13,6 +13,13 @@ export function CreateTripPage() {
   const [isGuestsModalInputOpen, setIsGuestsModalInputOpen] = useState(false);
   const [isConfirmTripModalInputOpen, setIsConfirmTripModalInputOpen] =
     useState(false);
+
+  const [destination, setDestination] = useState("");
+  const [owerName, setOwerName] = useState("");
+  const [owerEmail, setOwerEmail] = useState("");
+  const [eventStartAndEndDates, setEventStartAndEndDates] = useState<
+    DateRange | undefined
+  >();
 
   const [emailsToInvite, setEmailsToInvite] = useState([
     "diego@rocketseat.com.br",
@@ -91,6 +98,8 @@ export function CreateTripPage() {
             isGuestsInputOpen={isGuestsInputOpen}
             openGuestsInput={openGuestsInput}
             clearGuestsInput={clearGuestsInput}
+            setDestination={setDestination}
+            setEventStartAndEndDates={setEventStartAndEndDates}
           />
 
           {isGuestsInputOpen && (
@@ -129,6 +138,8 @@ export function CreateTripPage() {
         <ConfirmTripModal
           clearConfirmTripModalInput={clearConfirmTripModalInput}
           createTrip={createTrip}
+          setOwerName={setOwerName}
+          setOwerEmail={setOwerEmail}
         />
       )}
     </div>
